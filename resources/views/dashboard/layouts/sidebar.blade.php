@@ -1,0 +1,36 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          {{-- request disini biar jadi kelas aktif, jadi jika ini adalah halaman dashboard, maka aktif, jika bukan maka tidak aktif --}}
+          <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
+            <span data-feather="home"></span>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          {{-- tanda * berfungsi biar apapun di dalam posts, link yang berwarna biru akan tetap aktif, karena create post masih satu kesatuan di dalam folder posts --}}
+          <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
+            <span data-feather="file-text"></span>
+            My Post
+          </a>
+        </li>
+      </ul> 
+
+      {{-- can disini kalau pake gates, jadi fitur dibawah kalau bukan admin, maka disembunyiin --}}
+@can('admin')
+{{-- buat administrator, kalau emang gamau di authorization, apus aja --}}
+<h6 class="sidebar-headling d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+<span>Administrator</span>
+</h6>
+<ul class="nav flex-column">
+<li class="nav-item">
+  <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
+    <span data-feather="grid"></span>
+    Post Categories
+  </a>
+</li>
+</ul>
+@endcan
+    </div>
+  </nav>
